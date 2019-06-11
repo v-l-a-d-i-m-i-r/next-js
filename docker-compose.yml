@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  serve:
+    environment:
+      NODE_OPTIONS: --inspect=0.0.0.0:9229
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 8080:80
+      - 9229:9229
+    volumes:
+      - .:/www
+      - /www/node_modules
+      - /www/.next
+    entrypoint: '
+      sh -ce "
+        ./node_modules/.bin/next dev -H 0.0.0.0 -p 80;
+      "
+    '

@@ -1,0 +1,10 @@
+FROM node:10.15.3-alpine
+
+WORKDIR /www
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
+RUN set -x && npm install --unsafe-perm --loglevel=warn 
+
+COPY . .
